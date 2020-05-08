@@ -69,22 +69,20 @@ const persons: Person[] = [
     }
 ];
 
-const isAdmin = (person: Person): boolean => {
+function isAdmin (person: Person): person is Admin {
     return person.type === 'admin'
 }
 
-const isUser = (person: Person): boolean => {
+function isUser (person: Person): person is User {
     return person.type === 'user'
 }
-
 
 function logPerson(person: Person) {
     let additionalInformation: string = '';
     if (isAdmin(person)) {
-        additionalInformation = (person as Admin).role;
-    }
-    if (isUser(person)) {
-        additionalInformation = (person as User).occupation;
+        additionalInformation = person.role;
+    } else if (isUser(person)) {
+        additionalInformation = person.occupation;
     }
     console.log(` - ${chalk.green(person.name)}, ${person.age}, ${additionalInformation}`);
 }
