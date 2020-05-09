@@ -27,14 +27,12 @@ Run:
 */
 
 interface User {
-    type: 'user';
     name: string;
     age: number;
     occupation: string;
 }
 
 interface Admin {
-    type: 'admin';
     name: string;
     age: number;
     role: string;
@@ -44,44 +42,34 @@ type Person = User | Admin;
 
 const persons: Person[] = [
     {
-        type: 'user',
         name: 'Max Mustermann',
         age: 25,
         occupation: 'Chimney sweep'
     },
     {
-        type: 'admin',
         name: 'Jane Doe',
         age: 32,
         role: 'Administrator'
     },
     {
-        type: 'user',
         name: 'Kate Müller',
         age: 23,
         occupation: 'Astronaut'
     },
     {
-        type: 'admin',
         name: 'Bruce Willis',
         age: 64,
         role: 'World saver'
     }
 ];
 
-function isAdmin (person: Person): person is Admin {
-    return person.type === 'admin'
-}
-
-function isUser (person: Person): person is User {
-    return person.type === 'user'
-}
-
 function logPerson(person: Person) {
     let additionalInformation: string = '';
-    if (isAdmin(person)) {
+    // in 操作符可以安全的检查一个对象上是否存在一个属性
+    // 通常被用作类型保护
+    if ('role' in person) {
         additionalInformation = person.role;
-    } else if (isUser(person)) {
+    } else {
         additionalInformation = person.occupation;
     }
     console.log(` - ${chalk.green(person.name)}, ${person.age}, ${additionalInformation}`);

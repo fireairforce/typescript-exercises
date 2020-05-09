@@ -42,7 +42,7 @@ interface Admin {
 
 type Person = User | Admin
 
-const persons: Person[] /* <- Person[] */ = [
+const persons: Person[] = [
     {
         name: 'Max Mustermann',
         age: 25,
