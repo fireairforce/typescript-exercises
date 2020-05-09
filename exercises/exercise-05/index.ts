@@ -76,7 +76,7 @@ function filterPersons(persons: Person[], personType: 'admin' | 'user', criteria
     return persons
         .filter((person) => person.type === personType)
         .filter((person) => {
-            let criteriaKeys = getObjectKeys(criteria);
+            let criteriaKeys = getObjectKeys(criteria) as (keyof FilterCriteria<Person>)[];
             return criteriaKeys.every((fieldName) => {
                 return person[fieldName] === criteria[fieldName];
             });
