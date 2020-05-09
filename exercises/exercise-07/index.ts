@@ -40,8 +40,8 @@ interface Admin {
     age: number;
     role: string;
 }
-
-type PowerUser = unknown;
+// & 是两种 interface 求交集
+type PowerUser = Omit<User & Admin, 'type'> & { type: 'powerUser' }
 
 type Person = User | Admin | PowerUser;
 
