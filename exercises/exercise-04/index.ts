@@ -92,12 +92,15 @@ function logPerson(person: Person) {
     if (isUser(person)) {
         additionalInformation = person.occupation;
     }
+    // 因为这里没有要求输出 type ，所以我们可以把type Omit掉
     console.log(` - ${chalk.green(person.name)}, ${person.age}, ${additionalInformation}`);
 }
 
-function filterUsers(persons: Person[], criteria: Partial<User>): User[] {
+type FilterUserCriteria = Partial<Omit<User, 'type'>>
+
+function filterUsers(persons: Person[], criteria: FilterUserCriteria): User[] {
     return persons.filter(isUser).filter((user) => {
-        let criteriaKeys = Object.keys(criteria) as (keyof User)[];
+        let criteriaKeys = Object.keys(criteria) as (keyof FilterUserCriteria)[];
         return criteriaKeys.every((fieldName) => {
             return user[fieldName] === criteria[fieldName];
         });
