@@ -40,7 +40,8 @@ interface Admin {
     age: number;
     role: string;
 }
-// & 是两种 interface 求交集
+// & 表示类型的高级类型
+// 这里能满足需求，同时筛选掉了 type 这个属性
 type PowerUser = Omit<User & Admin, 'type'> & { type: 'powerUser' }
 
 type Person = User | Admin | PowerUser;
