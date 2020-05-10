@@ -1,8 +1,10 @@
+import { readFile } from 'fs'
+
 export class Database<T> {
     protected filename: string;
-    protected fullTextSearchFieldNames: unknown[];
+    protected fullTextSearchFieldNames: (keyof T)[];
 
-    constructor(filename: string, fullTextSearchFieldNames) {
+    constructor(filename: string, fullTextSearchFieldNames: (keyof T)[]) {
         this.filename = filename;
         this.fullTextSearchFieldNames = fullTextSearchFieldNames;
     }
